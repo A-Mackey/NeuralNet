@@ -21,6 +21,8 @@ public:
 	Matrix* matrixifyActivatedVals();
 	Matrix* matrixifyDerivedVals();
 
+	vector<Neuron*> getNeurons() { return neurons; };
+
 private:
 	int size;
 

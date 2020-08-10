@@ -1,6 +1,49 @@
 #include "NeuralNetwork.h"
+#include "MultiplyMatrix.h"
+#include <cassert>
 
 using namespace std;
+
+void NeuralNetwork::setErrors() {
+	if (this->target.size() == 0) {
+		cerr << "No target for this Neural Network" << endl;
+		assert(false);
+	}
+
+	if (this->target.size() != this->layers.at(this->layers.size() - 1)->getNeurons().size()) {
+		cerr << "Target size is not the same as output layer size: " << this->layers.at(this->layers.size() - 1)->getNeurons().size() << endl;
+		assert(false);
+	}
+
+	this->error = 0.00;
+	int outputLayerIndex = this->layers.size() - 1;
+	vector<Neuron*> outputNeurons = this->layers.at(outputLayerIndex)->getNeurons();
+
+	for (int i = 0; i < target.size(); i++) {
+		double tempErr = (outputNeurons.at(i)->getActivatedVal() - target.at(i));
+		errors.push_back(tempErr);
+		this->error += tempErr;
+	}
+
+	historicalErrors.push_back(this->error);
+}
+
+void NeuralNetwork::feedForward() {
+	for (int i = 0; i < (this->layers.size() - 1); i++) {
+		Matrix* a = this->getNeuronMatrix(i);
+
+		if (i != 0) {
+			a = this->getActivatedNeuronMatrix(i); 
+		}
+
+		Matrix* b = this->getWeightMatrix(i);
+		Matrix* c = (new utils::MultiplyMatrix(a,b))->execute();
+
+		for (int c_index = 0; c_index < c->getNumCols(); c_index++) {
+			this->setNeuronValue(i + 1, c_index, c->getValue(0, c_index));
+		}
+	}
+}
 
 void NeuralNetwork::setCurrentInput(vector<double> input) {
 	this->input = input;
@@ -36,5 +79,11 @@ void NeuralNetwork::printToConsole() {
 			Matrix* m = this->layers.at(i)->matrixifyActivatedVals();
 			m->printToConsole();
 		}
+
+		cout << "======================" << endl;
+		if (i < this->layers.size() - 1) {
+			this->getWeightMatrix(i)->printToConsole();
+		}
+		cout << "======================" << endl;
 	}
 }

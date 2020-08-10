@@ -1,2 +1,7 @@
-﻿  NeuralNet.cpp
+﻿  NeuralNetwork.cpp
+C:\Users\Smudg\Documents\GitHub\NeuralNet\NeuralNet\NeuralNet\NeuralNetwork.cpp(22,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Smudg\Documents\GitHub\NeuralNet\NeuralNet\NeuralNet\NeuralNetwork.cpp(32,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Smudg\Documents\GitHub\NeuralNet\NeuralNet\NeuralNet\NeuralNetwork.cpp(51,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Smudg\Documents\GitHub\NeuralNet\NeuralNet\NeuralNet\NeuralNetwork.cpp(72,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Smudg\Documents\GitHub\NeuralNet\NeuralNet\NeuralNet\NeuralNetwork.cpp(84,9): warning C4018: '<': signed/unsigned mismatch
   NeuralNet.vcxproj -> C:\Users\Smudg\Documents\GitHub\NeuralNet\NeuralNet\Debug\NeuralNet.exe
